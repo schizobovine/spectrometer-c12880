@@ -8,7 +8,7 @@
   https://github.com/groupgets/c12880ma/blob/master/arduino_c12880ma_example/arduino_c12880ma_example.ino
  */
 #include <Arduino.h>
-#include <elapsedMillis.h>
+#include "elapsedMillis.h"
 #include "c12880.h"
 
 #define ADC_BITS (12)
@@ -97,27 +97,27 @@ void C12880_Class::read_into(uint16_t *buffer) {
   _ultrashort_delay_100ns();
   //pixel integration starts after three clock pulses
   _pulse_clock(3);
-   _timings[0] = micros();
+  //_timings[0] = micros();
   //Integrate pixels for a while
   //_pulse_clock(_integ_clock_cycles);
   _pulse_clock_timed(duration_micros);
   //Set _ST_pin to low
   digitalWrite(_ST_pin, LOW);
-  _timings[1] = micros();
+  //_timings[1] = micros();
   //Sample for a period of time
   //integration stops at pulse 48 th pulse after ST went low
   _pulse_clock(48);
-  _timings[2] = micros();
+  //_timings[2] = micros();
   //pixel output is ready after last pulse #88 after ST wen low
   _pulse_clock(40);
-  _timings[3] = micros();
+  //_timings[3] = micros();
 
   //Read from SPEC_VIDEO
   for(int i = 0; i < C12880_NUM_CHANNELS; i++){
     buffer[i] = analogRead(_VIDEO_pin);
     _pulse_clock(1);
   }
-  _timings[4] = micros();
+  //_timings[4] = micros();
 
 }
 

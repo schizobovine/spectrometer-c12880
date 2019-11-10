@@ -26,9 +26,9 @@ public:
   void set_integration_time(float seconds);
   //Functionality methods
   void read_into(uint16_t *buffer);
-  unsigned int get_timing(int index){
-    return _timings[index];
-  }
+  //unsigned int get_timing(int index){
+  //  return _timings[index];
+  //}
 private:
   //helper methods
   inline void _pulse_clock(int cycles);
@@ -42,7 +42,7 @@ private:
   int _clock_delay_micros;
   float _integ_time;
   int _min_integ_micros;
-  unsigned int _timings[10];
+  //unsigned int _timings[10];
 };
 
 
